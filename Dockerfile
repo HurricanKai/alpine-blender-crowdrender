@@ -1,22 +1,17 @@
-FROM alpine:3.8 
-RUN apk add --no-cache python3 && \
-    python3 -m ensurepip && \
-    rm -r /usr/lib/python*/ensurepip && \
-    pip3 install --upgrade pip setuptools && \
-    if [ ! -e /usr/bin/pip ]; then ln -s pip3 /usr/bin/pip ; fi && \
-    if [[ ! -e /usr/bin/python ]]; then ln -sf /usr/bin/python3 /usr/bin/python; fi && \
-    rm -r /root/.cache
+FROM ubuntu
 
-RUN apk update && \
-	apk add --no-cache \
+RUN apt-get update && \
+	apt-get install -y \
 		curl \
 		bzip2 \
 		libfreetype6 \
 		libgl1-mesa-dev \
 		libglu1-mesa \
 		libxi6 \
-		unzip \
-		libxrender1
+        unzip \
+		libxrender1 && \
+	apt-get -y autoremove && \
+	rm -rf /var/lib/apt/lists/*
 
 ENV BLENDER_MAJOR 2.79
 ENV BLENDER_VERSION 2.79

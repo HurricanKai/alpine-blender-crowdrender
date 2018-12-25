@@ -7,18 +7,16 @@ RUN apk add --no-cache python3 && \
     if [[ ! -e /usr/bin/python ]]; then ln -sf /usr/bin/python3 /usr/bin/python; fi && \
     rm -r /root/.cache
 
-RUN apt-get update && \
-	apt-get install -y \
+RUN apk update && \
+	apk add --no-cache \
 		curl \
 		bzip2 \
 		libfreetype6 \
 		libgl1-mesa-dev \
 		libglu1-mesa \
 		libxi6 \
-        unzip \
-		libxrender1 && \
-	apt-get -y autoremove && \
-	rm -rf /var/lib/apt/lists/*
+		unzip \
+		libxrender1
 
 ENV BLENDER_MAJOR 2.79
 ENV BLENDER_VERSION 2.79
